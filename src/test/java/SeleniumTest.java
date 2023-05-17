@@ -1,7 +1,5 @@
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -27,33 +25,11 @@ class SeleniumTest {
         assertEquals("xpath Practice page", webDriver.getTitle());
     }
 
-//    @Test
-//    void buscarNoGoogle() throws InterruptedException {
-//        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-//        var chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("--remote-allow-origins=*", "--headless");
-//        WebDriver webDriver = new ChromeDriver(chromeOptions);
-//        webDriver.get("https://google.com");
-//        assertEquals("Google", webDriver.getTitle());
-//        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//        var elementFound =  webDriver.findElement(By.name("q"));
-//        elementFound.sendKeys("Java" + Keys.ENTER);
-//        var txtBoxFound =  webDriver.findElement(By.name("q"));
-//        assertEquals("Java", txtBoxFound.getText());
-//        var pathElement = webDriver.findElement(By.xpath("//a/h3"));
-//        var pathElements = webDriver.findElements(By.xpath("//a/h3"));
-//        assertEquals("Java | Oracle", pathElement.getText());
-//        pathElements.forEach(x -> System.out.println(x.getText()));
-////        elementFound.submit();
-////        var btnFound = webDriver.findElement(By.name("btnK"));
-////        btnFound.click();
-////        webDriver.close();
-//    }
-
-    @Test
-    void deveTestarTituloPagina() {
-        assertEquals("xpath Practice page", webDriver.getTitle());
+    @AfterEach
+     void afterAll() {
+        this.webDriver.quit();
     }
+
 
     @Test
     void deveTestarBotoes(){
@@ -125,15 +101,42 @@ class SeleniumTest {
 
     @Test
     void deveTestarCheckBox(){
-        WebElement checkboxGoogle = webDriver.findElement(By.xpath("//td[contains(text(), 'google.com')]/preceding-sibling::td/input[@type='checkboxGoogle']"));
+        WebElement checkboxGoogle = webDriver.findElement(By.xpath("//td[contains(text(), 'google.com')]/preceding-sibling::td/input[@type='checkbox']"));
         String locationGoogle = checkboxGoogle.getLocation().toString();
 
         checkboxGoogle.click();
 
         webDriver.navigate().refresh();
-        checkboxGoogle = webDriver.findElement(By.xpath("//td[contains(text(), 'google.com')]/preceding-sibling::td/input[@type='checkboxGoogle']"));
+        checkboxGoogle = webDriver.findElement(By.xpath("//td[contains(text(), 'google.com')]/preceding-sibling::td/input[@type='checkbox']"));
         assertNotEquals(locationGoogle, checkboxGoogle.getLocation().toString());
 
+    }
+
+    //    @Test
+//    void buscarNoGoogle() throws InterruptedException {
+//        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+//        var chromeOptions = new ChromeOptions();
+//        chromeOptions.addArguments("--remote-allow-origins=*", "--headless");
+//        WebDriver webDriver = new ChromeDriver(chromeOptions);
+//        webDriver.get("https://google.com");
+//        assertEquals("Google", webDriver.getTitle());
+//        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        var elementFound =  webDriver.findElement(By.name("q"));
+//        elementFound.sendKeys("Java" + Keys.ENTER);
+//        var txtBoxFound =  webDriver.findElement(By.name("q"));
+//        assertEquals("Java", txtBoxFound.getText());
+//        var pathElement = webDriver.findElement(By.xpath("//a/h3"));
+//        var pathElements = webDriver.findElements(By.xpath("//a/h3"));
+//        assertEquals("Java | Oracle", pathElement.getText());
+//        pathElements.forEach(x -> System.out.println(x.getText()));
+////        elementFound.submit();
+////        var btnFound = webDriver.findElement(By.name("btnK"));
+////        btnFound.click();
+////        webDriver.close();
+//    }
+    @Test
+    void deveTestarTituloPagina() {
+        assertEquals("xpath Practice page", webDriver.getTitle());
     }
 
 
